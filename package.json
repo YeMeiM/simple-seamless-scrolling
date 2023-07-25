@@ -1,6 +1,6 @@
 {
   "name": "simple-seamless-scrolling",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "一个简单的无缝滚动",
   "main": "index.js",
   "directories": {

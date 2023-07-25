@@ -12,7 +12,10 @@ vue2和vue3~~应该~~都可以用
 </SimpleSeamlessScrolling>
  ```
 * script
+
+```
 import SimpleSeamlessScrolling from "simple-seamlessScrolling";
+```
 
 ```
 export default {
@@ -44,7 +47,7 @@ export default {
 >| direction | 方向，horizontal: 水平, vertical: 垂直 | String | horizontal | 
 >| touchMove | 是否跟随手指触摸移动 | Boolean | true | 
 
-> **emits**
+> **event**
 >---
 >| 事件名 | 说明 | 回调参数 |
 >|-----|:------|-------|

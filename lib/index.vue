@@ -1,14 +1,14 @@
 <template>
   <div class="simple-seamless-scrolling">
     <div ref="SSSList" class="simple-seamless-list-group" @touchstart="stopAnimation" @touchmove="moveAnimation"
-      @touchend="runingAnimation" :style="`flex-direction:${flexDirection}`">
+         @touchend="runningAnimation" :style="`flex-direction:${flexDirection}`">
       <div class="simple-seamless-list-container" :style="`flex-direction:${flexDirection};`">
-        <slot :item="item" v-for="item in list">{{ item }}</slot>
+        <slot :item="item" :key="index" v-for="(item, index) in list">{{ item }}</slot>
         <slot name="holder" v-if="list.length === 0" />
       </div>
       <div class="simple-seamless-list-container" v-if="showCopy && !unlimited"
         :style="`flex-direction:${flexDirection}`">
-        <slot :item="item" v-for="item in list">{{ item }}</slot>
+        <slot :item="item" :key="index" v-for="(item, index) in list">{{ item }}</slot>
       </div>
     </div>
   </div>
@@ -17,7 +17,7 @@
 <script>
 
 /**
- * @event changePosition {postion: 当前位置, height: 组件的高度, width: 组件的宽度, innerHeight: 内部列表的总高, innerWidth: 内部列表的总宽}
+ * @event changePosition {position: 当前位置, height: 组件的高度, width: 组件的宽度, innerHeight: 内部列表的总高, innerWidth: 内部列表的总宽}
  * @prop unlimited 无限模式，按照一个方向无限滚动
  * @prop step 速度，越小越慢，越大越快，默认为1
  * @prop list 列表
@@ -85,15 +85,16 @@ export default {
         let x = event.changedTouches[0].clientX;
         let moveX = x - this.touch.x;
         this.touch.x = x;
-        this.setPostion(moveX);
+        this.setPosition(moveX);
       } else if (this.onTouch) {
         let y = event.changedTouches[0].clientY;
         let moveY = y - this.touch.y;
         this.touch.y = y;
-        this.setPostion(moveY);
+        this.setPosition(moveY);
       }
     },
-    runingAnimation() {
+
+    runningAnimation() {
       if (this.onTouch) {
         this.touch.x = -1;
         this.onTouch = false;
@@ -124,14 +125,14 @@ export default {
 
         if (!this.onTouch) {
           let step = -this.step;
-          this.setPostion(isNaN(step) ? -1 : step);
+          this.setPosition(isNaN(step) ? -1 : step);
         }
       }
       if (this.onStart && this.$refs.SSSList) {
         window.requestAnimationFrame(this.drawAnimation);
       }
     },
-    setPostion(step) {
+    setPosition(step) {
       if (!this.$refs.SSSList) {
         return false;
       }
@@ -179,7 +180,6 @@ export default {
       });
     },
   },
-  components: {},
   mounted() {
     this.init();
   },
