@@ -14,7 +14,7 @@ vue2和vue3~~应该~~都可以用
 * script
 
 ```
-import SimpleSeamlessScrolling from "simple-seamlessScrolling";
+import SimpleSeamlessScrolling from "simple-seamless-scrolling";
 ```
 
 ```
